@@ -7,7 +7,7 @@ metadata:
     project: expense
     environment: dev
     type: backend
-specs:
+spec:
   containers:
   - name: nginx
     image: nginx
