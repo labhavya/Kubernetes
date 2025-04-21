@@ -24,9 +24,9 @@ spec:
     component: backup
   ports:
   - name: http
-    protocal: tcp
+    protocol: tcp
     port: 80
-    targetport: 9376
+    targetPort: 9376
   
 
 
