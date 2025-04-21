@@ -1,0 +1,9 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-demo
+data:
+  course: "kubernetes"
+  trainer: "siva"
+  duration: "26hrs"
