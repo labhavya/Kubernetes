@@ -27,7 +27,7 @@ spec:
     component: backup
     type: loadbalancer-demo
   ports:
-  - protocol: tcp
+  - protocol: TCP
     port: 80
     targetPort: 80  # target container port
     
