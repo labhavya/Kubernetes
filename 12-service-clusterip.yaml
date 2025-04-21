@@ -3,10 +3,10 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: nginx-pod
-labels:
-  project: expense
-  environment: dev
-  component: backup
+  labels:
+    project: expense
+    environment: dev
+    component: backup
 spec:
   containers:
   - name: nginx
