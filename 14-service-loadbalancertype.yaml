@@ -3,12 +3,12 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nginx-pod-LoadBalancer
+  name: nginx-pod-loadbalancer
   labels:
     project: expense
     environment: dev
     component: backup
-    type: LoadBalancer-demo
+    type: loadbalancer-demo
 spec:
   containers:
   - name: nginx
@@ -18,14 +18,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service-LoadBalancer
+  name: nginx-service-loadbalancer
 spec:
   type: LoadBalancer
   selector:
     project: expense
     environment: dev
     component: backup
-    type: LoadBalancer-demo
+    type: loadbalancer-demo
   ports:
   - protocal: tcp
     port: 80
