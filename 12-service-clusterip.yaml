@@ -25,8 +25,8 @@ spec:
   ports:
   - name: http
     protocol: TCP
-    port: 80
-    targetPort: 9376
+    port: 80 #service port
+    targetPort: 80  # target container port
   
 
 
