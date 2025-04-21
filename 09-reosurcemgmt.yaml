@@ -1,0 +1,19 @@
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: backend
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    resources:
+    #soft limits
+      requests: 
+        memory: "50Mi"
+        cpu: "100m"
+      #hard limits
+      limits:
+        memory: "100Mi"
+        cpu: "150m"
+
