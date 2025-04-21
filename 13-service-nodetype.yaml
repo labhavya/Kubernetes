@@ -1,0 +1,35 @@
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod-nodetype
+  labels:
+    project: expense
+    environment: dev
+    component: backup
+    type: nodetype-demo
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service-nodetype
+spec:
+  type: NodePort
+  selector:
+    project: expense
+    environment: dev
+    component: backup
+    type: nodetype-demo
+  ports:
+  - port: 80 #service port
+    targetPort: 80  # target container port
+    nodePort: 30007
+  
+
+
