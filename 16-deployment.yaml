@@ -1,0 +1,25 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: exepnse
+    tier: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: exepnse
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: exepnse
+        tier: frontend
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:stable-alpine3.21-perl
+        ports:
+        - containerPort: 80
