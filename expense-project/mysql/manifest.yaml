@@ -1,0 +1,42 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  labels:
+    app: exepnse
+    tier: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: exepnse
+      tier: database
+  template:
+    metadata:
+      labels:
+        app: exepnse
+        tier: database
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:1.0.0
+        ports:
+        - containerPort: 3306 #service port
+
+---
+
+#service to make the mysql accessible from backend.
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+spec:
+  selector:
+    app: exepnse
+    tier: database
+  ports:
+  - name: mysql
+    port: 3306 #service port
+    targetPort: 3306  # target container port
