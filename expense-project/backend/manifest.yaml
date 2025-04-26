@@ -1,0 +1,46 @@
+
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: backend
+  namespace: expense-ns
+  labels:
+    app: exepnse
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: exepnse
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: exepnse
+        tier: backend
+    spec:
+      containers:
+      - name: backend
+        image: labhavya/backend:1.0.0
+        ports:
+        - containerPort: 8080 #service port
+
+---
+
+#service to make the mysql accessible from backend.
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: backend
+  namespace: expense-ns
+spec:
+  selector:
+    app: exepnse
+    tier: backend
+  ports:
+  - name: backend
+    port: 8080 #service port
+    targetPort: 8080  # target container port
