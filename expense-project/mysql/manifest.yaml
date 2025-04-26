@@ -1,9 +1,10 @@
 
 apiVersion: apps/v1
 kind: Deployment
-namespace: expense-ns
+
 metadata:
   name: mysql
+  namespace: expense-ns
   labels:
     app: exepnse
     tier: database
@@ -31,9 +32,10 @@ spec:
 
 apiVersion: v1
 kind: Service
-namespace: expense-ns
+
 metadata:
   name: mysql
+  namespace: expense-ns
 spec:
   selector:
     app: exepnse
