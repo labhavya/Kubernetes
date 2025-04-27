@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: labhavya/backend:1.0.0
+        image: labhavya/backend:1.1.0
         ports:
         - containerPort: 8080 #service port
 
