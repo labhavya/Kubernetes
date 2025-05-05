@@ -4,6 +4,7 @@ metadata:
   name: ebs-claim
 spec:
   storageClassName: "" # Empty string must be explicitly set otherwise default StorageClass will be set
+  #PV NAME
   volumeName: static-vol
   accessModes:
     - ReadWriteOnce
@@ -19,6 +20,8 @@ metadata:
   labels:
     app: static-vol
 spec:
+  nodeSelector:
+    topology.ebs.csi.aws.com/zone: us-east-1b
   containers:
   - name: nginx
     image: nginx
