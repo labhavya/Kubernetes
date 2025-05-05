@@ -10,9 +10,11 @@ spec:
   # modify replicas according to your case
   replicas: 3
   selector:
+  #replicaset use these labels to find the PODS for creating the desired number of replicas
     matchLabels:
       tier: frontend
       app: exepnse
+  #POD template
   template:
     metadata:
       labels:
