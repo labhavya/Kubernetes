@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: ebs-claim
+  name: ebs-claim-dynamic
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: ebs-sc
+  storageClassName: ebs-sc-dynamic
   resources:
     requests:
       storage: 40Gi
@@ -13,11 +13,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-dynamic-loadbalancer
+  name: nginx-dynamic-lb
 spec:
   type: LoadBalancer
   selector:
-    app: dynamic-vol
+    app: dynamic-prov-vol
   ports:
   - protocol: TCP
     port: 80
@@ -29,7 +29,7 @@ kind: Pod
 metadata:
   name: app
   labels:
-    app: dynamic-vol
+    app: dynamic-prov-vol
 spec:
   nodeSelector:
     topology.ebs.csi.aws.com/zone: us-east-1b
@@ -44,4 +44,4 @@ spec:
   volumes:
   - name: persistent-storage
     persistentVolumeClaim:
-      claimName: ebs-claim
+      claimName: ebs-claim-dynamic
