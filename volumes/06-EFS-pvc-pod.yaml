@@ -9,6 +9,7 @@ spec:
   resources:
     requests:
       storage: 5Gi
+---
 
 apiVersion: v1
 kind: Service
@@ -23,7 +24,7 @@ spec:
     port: 80
     targetPort: 80  # target container port
 
-
+---
 
 apiVersion: v1
 kind: Pod
