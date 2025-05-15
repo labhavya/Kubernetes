@@ -29,8 +29,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: efs-app
-labels:
-  app: efs-static-vol
+  labels:
+    app: efs-static-vol
 spec:
   containers:
   - name: nginx
