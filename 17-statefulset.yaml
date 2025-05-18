@@ -18,7 +18,8 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: nginx-StatefulSet
+  name: nginx-statefulset
+spec:
   selector:
     matchLabels:
       app: nginx
