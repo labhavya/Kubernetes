@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql-headless
+  name: mysql
   namespace: expense-ns
   labels:
     project: expense
@@ -16,7 +16,7 @@ spec:
     project: expense
     tier: database
 ---
-
+#normal serivce
 apiVersion: v1
 kind: Service
 metadata:
@@ -35,10 +35,11 @@ spec:
     targetPort: 3306  # target container port
 
 ---
+#statefulset
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mysql-statefulset
+  name: mysql
   namespace: expense-ns
 spec:
   selector:
@@ -46,7 +47,7 @@ spec:
       project: expense
       tier: database
        # has to match .spec.template.metadata.labels
-  serviceName: "mysql-headless"
+  serviceName: "mysql"
   replicas: 1 # by default is 1
   minReadySeconds: 10 # by default is 0
   template:
