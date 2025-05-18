@@ -1,0 +1,75 @@
+#headless service, it is like normal serivce and only difference is for headless clusterIP is None
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-headless
+  labels:
+    project: expense
+    tier: database
+spec:
+  ports:
+  - port: 3306
+    name: db
+  clusterIP: None
+  selector:
+    project: expense
+    tier: database
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+spec:
+  selector:
+    project: expense
+    tier: database
+    
+  ports:
+  - name: http
+    protocol: TCP
+    port: 3306 #service port
+    targetPort: 3306  # target container port
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql-statefulset
+spec:
+  selector:
+    matchLabels:
+      project: expense
+      tier: database
+       # has to match .spec.template.metadata.labels
+  serviceName: "mysql-headless"
+  replicas: 3 # by default is 1
+  minReadySeconds: 10 # by default is 0
+  template:
+    metadata:
+      labels:
+        project: expense
+        tier: database
+         # has to match .spec.selector.matchLabels
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: mysql
+        image: labhavya/mysql:1.0.0
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - name: www
+          mountPath: /var/lib/mysql
+  #instead of creating PVC resource, you can directly provide in stateful set
+  volumeClaimTemplates:
+  - metadata:
+      name: www
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "ebs-sc-dynamic"
+      resources:
+        requests:
+          storage: 5Gi
+# in above syntax claim and mount the volume at once. 
