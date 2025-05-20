@@ -33,6 +33,15 @@ metadata:
   name: scaling-pol
   namespace: expense-ns
 spec:
+
+  scaleRef:
+    kind: ReplicationController
+    name: frontend
+    subresource: scale
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 5
+
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
