@@ -21,26 +21,39 @@ spec:
       containers:
       - name: frontend
         image: labhavya/frontend:1.3.0    # got this from DockerRepo/fronend
+        resources:
+    #soft limits
+          requests: 
+            memory: "50Mi"
+            cpu: "100m"
+          limits:
+            memory: "100Mi"
+            cpu: "150m"
+
         ports:
         - containerPort: 8080 #service port
 
 ---
 
 #scaling policy
-apiVersion: autoscaling/v1
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: scaling-pol
-  namespace: expense-ns
 spec:
-
-  scaleRef:
-    kind: ReplicationController
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
     name: frontend
-    subresource: scale
   minReplicas: 1
-  maxReplicas: 5
-  targetCPUUtilizationPercentage: 5
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 5
 
 ---
 #service to make the mysql accessible from backend.
