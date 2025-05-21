@@ -3,6 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: configmap-nginx
+  namespace: expense-ns
 data: 
   nginx.conf: |
 
