@@ -91,6 +91,8 @@ spec:
         volumeMounts:
         - name: config-vol
           mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+          readOnly: true
         resources:
     #soft limits
           requests: 
