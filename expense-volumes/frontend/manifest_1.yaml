@@ -107,7 +107,7 @@ spec:
         configMap:
           name: configmap-nginx
           items:
-            - key: nginx
+            - key: nginx.conf
               path: nginx.conf
 ---
 
